@@ -23,7 +23,7 @@ Os testes "Com e Sem Cache" validaram o comportamento da infraestrutura. Com o R
 
 ## 📊 Visão Geral do Desempenho (Carga Máxima: 100 Utilizadores)
 
-Para ilustrar o impacto do cache, o gráfico abaixo (gerado em Python com a biblioteca Matplotlib) compara o **Tempo Médio** e o **Tempo Máximo** de resposta (em milissegundos) dos quatro cenários sob a carga máxima de estresse.
+Para ilustrar o impacto do cache, o gráfico abaixo compara o **Tempo Médio** e o **Tempo Máximo** de resposta (em milissegundos) dos quatro cenários sob a carga máxima de estresse.
 
 ![Gráfico Comparativo de Tempos](imagens/comparativo_tempos.png)
 
@@ -43,21 +43,21 @@ A API em Python operou com eficiência, delegando a resposta de consultas repeti
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 10 | 0 | 3300.00 | 3500 | 3343.67 | 3519 |
 
-<img src="imagens/cenario1_10_charts.png" width="100%" alt="Cenário 1 - 10 Users">
+![Cenário 1 - 10 Users](imagens/cenario1_10_charts.png)
 
 **🔹 Carga Média (50 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 3437 | 0 | 1011.60 | 3300 | 1390.29 | 3361 |
 
-<img src="imagens/cenario1_50_charts.png" width="100%" alt="Cenário 1 - 50 Users">
+![Cenário 1 - 50 Users](imagens/cenario1_50_charts.png)
 
 **🔹 Carga Máxima (100 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 11576 | 0 | 1011.28 | 1900 | 1202.60 | 3361 |
 
-<img src="imagens/cenario1_100_charts.png" width="100%" alt="Cenário 1 - 100 Users">
+![Cenário 1 - 100 Users](imagens/cenario1_100_charts.png)
 
 ---
 
@@ -69,21 +69,21 @@ Sem a proteção da memória, o servidor precisou reprocessar integralmente cada
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 581 | 0 | 3300.00 | 3300 | 3098.29 | 3840 |
 
-<img src="imagens/cenario2_10_charts.png" width="100%" alt="Cenário 2 - 10 Users">
+![Cenário 2 - 10 Users](imagens/cenario2_10_charts.png)
 
 **🔹 Carga Média (50 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 5771 | 0 | 1013.68 | 3300 | 1390.62 | 3372 |
 
-<img src="imagens/cenario2_50_charts.png" width="100%" alt="Cenário 2 - 50 Users">
+![Cenário 2 - 50 Users](imagens/cenario2_50_charts.png)
 
 **🔹 Carga Máxima (100 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 13251 | 0 | 1014.24 | 1900 | 1220.91 | 3506 |
 
-<img src="imagens/cenario2_100_charts.png" width="100%" alt="Cenário 2 - 100 Users">
+![Cenário 2 - 100 Users](imagens/cenario2_100_charts.png)
 
 ---
 
@@ -95,21 +95,21 @@ O melhor volume de requisições consolidadas ocorreu neste ambiente. A estabili
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 594 | 0 | 3300.00 | 3300 | 3118.65 | 3369 |
 
-<img src="imagens/cenario3_10_charts.png" width="100%" alt="Cenário 3 - 10 Users">
+![Cenário 3 - 10 Users](imagens/cenario3_10_charts.png)
 
 **🔹 Carga Média (50 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 4892 | 0 | 1011.49 | 3300 | 1380.94 | 3364 |
 
-<img src="imagens/cenario3_50_charts.png" width="100%" alt="Cenário 3 - 50 Users">
+![Cenário 3 - 50 Users](imagens/cenario3_50_charts.png)
 
 **🔹 Carga Máxima (100 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 15365 | 0 | 1011.21 | 1900 | 1217.94 | 3499 |
 
-<img src="imagens/cenario3_100_charts.png" width="100%" alt="Cenário 3 - 100 Users">
+![Cenário 3 - 100 Users](imagens/cenario3_100_charts.png)
 
 ---
 
@@ -121,21 +121,21 @@ Neste cenário, a API em Ruby absorveu diretamente todo o estresse. Observa-se q
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 489 | 0 | 3300.00 | 3400 | 3185.40 | 3720 |
 
-<img src="imagens/cenario4_10_charts.png" width="100%" alt="Cenário 4 - 10 Users">
+![Cenário 4 - 10 Users](imagens/cenario4_10_charts.png)
 
 **🔹 Carga Média (50 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 5962 | 0 | 1011.43 | 3300 | 1374.35 | 3715 |
 
-<img src="imagens/cenario4_50_charts.png" width="100%" alt="Cenário 4 - 50 Users">
+![Cenário 4 - 50 Users](imagens/cenario4_50_charts.png)
 
 **🔹 Carga Máxima (100 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 12741 | 0 | 1011.13 | 1900 | 1215.09 | 3607 |
 
-<img src="imagens/cenario4_100_charts.png" width="100%" alt="Cenário 4 - 100 Users">
+![Cenário 4 - 100 Users](imagens/cenario4_100_charts.png)
 
 ---
 

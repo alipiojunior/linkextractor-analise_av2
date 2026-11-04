@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação - Link Extractor</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1e1e1e; color: #fff; overflow: hidden; }
+        .slide { display: none; height: 100vh; width: 100vw; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px; box-sizing: border-box; }
+        .active { display: flex; }
+        h1 { color: #61dafb; font-size: 3rem; margin-bottom: 20px; }
+        h2 { color: #4CAF50; font-size: 2.2rem; margin-bottom: 20px; }
+        p, li { font-size: 1.5rem; line-height: 1.6; max-width: 900px; text-align: left; }
+        ul { margin-top: 20px; }
+        .highlight { color: #ff9800; font-weight: bold; }
+        .nav-btn { position: absolute; bottom: 30px; padding: 15px 30px; font-size: 1.2rem; cursor: pointer; background: #61dafb; color: #1e1e1e; border: none; border-radius: 5px; font-weight: bold; }
+        #prev { left: 50px; }
+        #next { right: 50px; }
+        .img-container { margin-top: 20px; background: #fff; padding: 10px; border-radius: 8px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; text-align: left; max-width: 1000px; width: 100%; }
+        .box { background: #2a2a2a; padding: 20px; border-radius: 10px; border-left: 5px solid #61dafb; }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Título -->
+    <div class="slide active">
+        <h1>Análise de Desempenho<br>Link Extractor</h1>
+        <p style="text-align: center;">Computação Distribuída</p>
+        <p style="text-align: center; margin-top: 50px;"><strong>Alípio Rollo Júnior</strong> (2320422/3)<br>Ciência da Computação</p>
+    </div>
+
+    <!-- Slide 2: Metodologia e Infraestrutura -->
+    <div class="slide">
+        <h2>Metodologia e Infraestrutura</h2>
+        <div class="grid-2">
+            <div class="box">
+                <h3 style="color: #61dafb;">Ambiente e Tráfego</h3>
+                <ul>
+                    <li>Orquestração via <strong>Docker Compose</strong> (isolamento).</li>
+                    <li>Ramp-up Locust: <strong>10, 50 e 100 Utilizadores</strong>.</li>
+                    <li>Requisições GET repetitivas redirecionadas na porta local.</li>
+                </ul>
+            </div>
+            <div class="box">
+                <h3 style="color: #ff9800;">O Teste do Cache</h3>
+                <ul>
+                    <li><strong>Com Cache:</strong> O Redis armazena a primeira resposta e entrega instantaneamente as seguintes.</li>
+                    <li><strong>Sem Cache:</strong> O servidor é forçado a reprocessar cada requisição do zero.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Escalabilidade 10 e 50 -->
+    <div class="slide">
+        <h2>Escalabilidade Inicial (10 e 50 Utilizadores)</h2>
+        <div class="grid-2">
+            <div class="box" style="border-left-color: #4CAF50;">
+                <h3>Carga Leve (10 users)</h3>
+                <p>O sistema rodou frio (cold start).</p>
+                <ul>
+                    <li>Ruby atingiu pico de <strong>3720 ms</strong> sem cache.</li>
+                    <li>Python obteve <strong>3840 ms</strong> sem cache.</li>
+                </ul>
+            </div>
+            <div class="box" style="border-left-color: #ff9800;">
+                <h3>Carga Média (50 users)</h3>
+                <p>O tráfego aumentou e as filas começaram a estabilizar.</p>
+                <ul>
+                    <li>Ruby com cache dominou: <strong>4892</strong> requisições processadas.</li>
+                    <li>As falhas permaneceram em 0% em todos os cenários.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Estresse Máximo 100 -->
+    <div class="slide">
+        <h2>Carga Máxima: O Impacto nos 100 Utilizadores</h2>
+        <div class="img-container">
+            <!-- Certifique-se de que a imagem comparativo_tempos.png está na pasta imagens -->
+            <img src="imagens/comparativo_tempos.png" alt="Gráfico 100 Users" height="350">
+        </div>
+        <p style="text-align: center; margin-top: 20px; font-size: 1.2rem;">
+            Enquanto as médias (barras azuis) são similares, a <strong>ausência de cache</strong> elevou drasticamente<br>
+            os tempos máximos de resposta (barras vermelhas) batendo picos de <span class="highlight">3607 ms (Ruby)</span>.
+        </p>
+    </div>
+
+    <!-- Slide 5: Conclusão -->
+    <div class="slide">
+        <h2>Conclusão Arquitetural</h2>
+        <div class="box" style="max-width: 900px; text-align: left; border-left-color: #e91e63;">
+            <ul>
+                <li><strong>Estabilidade Geral:</strong> Python e Ruby lidaram com 100 utilizadores mantendo <span class="highlight">0% de falhas</span>.</li>
+                <li><strong>O Papel do Redis:</strong> O cache comportou-se como um verdadeiro escudo computacional, cravando o percentil 95% em 1900ms para ambas as linguagens.</li>
+                <li><strong>Veredito:</strong> Melhorias arquiteturais (uso de cache em memória) impactam a resiliência do sistema de forma muito mais drástica do que a linguagem isolada da API.</li>
+            </ul>
+        </div>
+    </div>
+
+    <button class="nav-btn" id="prev" onclick="changeSlide(-1)">❮ Anterior</button>
+    <button class="nav-btn" id="next" onclick="changeSlide(1)">Próximo ❯</button>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+    </script>
+</body>
+</html>
