@@ -36,6 +36,10 @@ for i, (titulo, dados) in enumerate(cenarios.items(), 1):
     ax.set_xticks(x)
     ax.set_xticklabels(labels, fontsize=11)
     
+    # NOVIDADE: Aumenta o limite superior do eixo Y em 15% para os números não cortarem
+    max_y = max(max(dados["mediana"]), max(dados["maximo"]))
+    ax.set_ylim(0, max_y * 1.15)
+    
     # Legenda movida para baixo do gráfico
     ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=2, frameon=False)
     ax.grid(axis='y', linestyle='--', alpha=0.7)
@@ -52,4 +56,4 @@ for i, (titulo, dados) in enumerate(cenarios.items(), 1):
     plt.savefig(f'imagens/grafico_cenario{i}.png', bbox_inches='tight')
     plt.close()
 
-print("Gráficos gerados com sucesso na pasta 'imagens/'!")
+print("Gráficos gerados com sucesso na pasta 'imagens/' com limite de margem corrigido!")
