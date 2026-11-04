@@ -31,70 +31,119 @@ Para ilustrar o impacto do cache, o gráfico abaixo (gerado em Python com a bibl
 
 ---
 
-## 📈 Análise Detalhada por Cenário (100 Utilizadores)
+## 📈 Análise Detalhada por Cenário (10, 50 e 100 Utilizadores)
 
-### Cenário 1: Python COM Cache (Redis)
-A API delegou a resposta de consultas repetidas para a memória. O sistema processou de forma eficiente mais de 11.500 requisições, mantendo o percentil 95% estável em 1900 ms e absorvendo a simultaneidade sem esforço computacional excessivo.
+Para compreender a resiliência do sistema, analisamos o comportamento das APIs desde a carga inicial (*cold start*) até a saturação. 
 
+### 🟢 Cenário 1: Python COM Cache (Redis)
+A API em Python operou com eficiência, delegando a resposta de consultas repetidas para a memória em vez de recalcular as respostas.
+
+**🔹 Carga Leve (10 Utilizadores)**
+| Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 10 | 0 | 3300.00 | 3500 | 3343.67 | 3519 |
+
+<img src="imagens/cenario1_10_charts.png" width="100%" alt="Cenário 1 - 10 Users">
+
+**🔹 Carga Média (50 Utilizadores)**
+| Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 3437 | 0 | 1011.60 | 3300 | 1390.29 | 3361 |
+
+<img src="imagens/cenario1_50_charts.png" width="100%" alt="Cenário 1 - 50 Users">
+
+**🔹 Carga Máxima (100 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 11576 | 0 | 1011.28 | 1900 | 1202.60 | 3361 |
 
-### Cenário 2: Python SEM Cache
-O servidor precisou reprocessar integralmente cada requisição, sem o auxílio da memória rápida. Este esforço evidenciou a vulnerabilidade da CPU perante picos de tráfego, resultando num pico máximo de resposta de 3506 ms.
+<img src="imagens/cenario1_100_charts.png" width="100%" alt="Cenário 1 - 100 Users">
 
+---
+
+### 🔴 Cenário 2: Python SEM Cache
+Sem a proteção da memória, o servidor precisou reprocessar integralmente cada requisição. A carga média já evidencia o esforço computacional contínuo.
+
+**🔹 Carga Leve (10 Utilizadores)**
+| Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 581 | 0 | 3300.00 | 3300 | 3098.29 | 3840 |
+
+<img src="imagens/cenario2_10_charts.png" width="100%" alt="Cenário 2 - 10 Users">
+
+**🔹 Carga Média (50 Utilizadores)**
+| Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 5771 | 0 | 1013.68 | 3300 | 1390.62 | 3372 |
+
+<img src="imagens/cenario2_50_charts.png" width="100%" alt="Cenário 2 - 50 Users">
+
+**🔹 Carga Máxima (100 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 13251 | 0 | 1014.24 | 1900 | 1220.91 | 3506 |
 
-### Cenário 3: Ruby COM Cache (Redis)
-Apresentou o maior volume absoluto de requisições consolidadas no teste (15.365). A mediana e a média comprovam um comportamento de vazão altamente previsível e robusto, absorvendo as operações de leitura simultâneas com distinção.
+<img src="imagens/cenario2_100_charts.png" width="100%" alt="Cenário 2 - 100 Users">
 
+---
+
+### 🟢 Cenário 3: Ruby COM Cache (Redis)
+O melhor volume de requisições consolidadas ocorreu neste ambiente. A estabilidade na carga média e máxima demonstrou excelente sinergia entre o Ruby e o Redis.
+
+**🔹 Carga Leve (10 Utilizadores)**
+| Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 594 | 0 | 3300.00 | 3300 | 3118.65 | 3369 |
+
+<img src="imagens/cenario3_10_charts.png" width="100%" alt="Cenário 3 - 10 Users">
+
+**🔹 Carga Média (50 Utilizadores)**
+| Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 4892 | 0 | 1011.49 | 3300 | 1380.94 | 3364 |
+
+<img src="imagens/cenario3_50_charts.png" width="100%" alt="Cenário 3 - 50 Users">
+
+**🔹 Carga Máxima (100 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 15365 | 0 | 1011.21 | 1900 | 1217.94 | 3499 |
 
-### Cenário 4: Ruby SEM Cache
-Sem a barreira protetora do cache, o backend em Ruby sentiu as rajadas iniciais, registando o maior pico de latência de toda a análise (3607 ms). Demonstrou que o *ramp-up* inicial gera uma instabilidade acentuada até que o servidor consiga estabilizar as filas de processos.
+<img src="imagens/cenario3_100_charts.png" width="100%" alt="Cenário 3 - 100 Users">
 
+---
+
+### 🔴 Cenário 4: Ruby SEM Cache
+Neste cenário, a API em Ruby absorveu diretamente todo o estresse. Observa-se que, apesar de manter 0% de falhas, as latências máximas foram empurradas aos limites do teste.
+
+**🔹 Carga Leve (10 Utilizadores)**
+| Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 489 | 0 | 3300.00 | 3400 | 3185.40 | 3720 |
+
+<img src="imagens/cenario4_10_charts.png" width="100%" alt="Cenário 4 - 10 Users">
+
+**🔹 Carga Média (50 Utilizadores)**
+| Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| 5962 | 0 | 1011.43 | 3300 | 1374.35 | 3715 |
+
+<img src="imagens/cenario4_50_charts.png" width="100%" alt="Cenário 4 - 50 Users">
+
+**🔹 Carga Máxima (100 Utilizadores)**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | 12741 | 0 | 1011.13 | 1900 | 1215.09 | 3607 |
 
----
-
-## 🔍 Histórico de Escalabilidade (Progressão de Carga)
-
-<details>
-<summary>👉 <b>Clique aqui para expandir os gráficos de desempenho do Locust (10 e 50 Utilizadores)</b></summary>
-<br>
-O comportamento do sistema durante as fases iniciais de escalabilidade. Pode observar-se a transição da carga leve (10 utilizadores) para a carga média (50 utilizadores), comprovando a estabilidade da aplicação antes do pico de estresse máximo.
-
-### Cenário 1: Python COM Cache
-**Carga de 10 e 50 Utilizadores:**
-<img src="imagens/cenario1_10_charts.png" width="48%"> <img src="imagens/cenario1_50_charts.png" width="48%">
-
-### Cenário 2: Python SEM Cache
-**Carga de 10 e 50 Utilizadores:**
-<img src="imagens/cenario2_10_charts.png" width="48%"> <img src="imagens/cenario2_50_charts.png" width="48%">
-
-### Cenário 3: Ruby COM Cache
-**Carga de 10 e 50 Utilizadores:**
-<img src="imagens/cenario3_10_charts.png" width="48%"> <img src="imagens/cenario3_50_charts.png" width="48%">
-
-### Cenário 4: Ruby SEM Cache
-**Carga de 10 e 50 Utilizadores:**
-<img src="imagens/cenario4_10_charts.png" width="48%"> <img src="imagens/cenario4_50_charts.png" width="48%">
-
-</details>
+<img src="imagens/cenario4_100_charts.png" width="100%" alt="Cenário 4 - 100 Users">
 
 ---
 
 ## 📝 Conclusões Finais
 
-Ambas as linguagens de programação mantiveram a total integridade do sistema, alcançando a marca de 0% de falhas (*fails*) durante as fases de estresse prolongado. No entanto, a análise dos extremos (Tempos Máximos) consolida a tese de que o **Redis atua como um escudo computacional imprescindível**. 
+Ambas as linguagens de programação mantiveram a total integridade do sistema, alcançando a marca de 0% de falhas (*fails*) durante as fases de estresse prolongado. No entanto, a análise pormenorizada de cada etapa de carga consolida a tese de que o **Redis atua como um escudo computacional imprescindível**. 
 
-A ausência de uma base de dados em memória para mitigar o reprocessamento de leituras elevou drasticamente as latências máximas. Em sistemas distribuídos modernos, otimizações arquiteturais e a correta aplicação de componentes de cache trazem um impacto muito mais profundo na resiliência e na experiência do utilizador final do que a mera escolha da linguagem de desenvolvimento da API.
+A ausência de uma base de dados em memória para mitigar o reprocessamento de leituras elevou drasticamente as latências máximas nos picos de acesso, independentemente da linguagem. Em sistemas distribuídos modernos, otimizações arquiteturais e a correta aplicação de componentes de cache trazem um impacto muito mais profundo na resiliência e na experiência do utilizador final do que a mera escolha da linguagem de desenvolvimento da API.
 
 ---
 **Autor:** Alípio Fernando Gonçalves Rollo Júnior (Matrícula: 2320422/3)  
