@@ -4,20 +4,20 @@ import numpy as np
 # Dados dos 4 cenários (10, 50, 100 utilizadores)
 cenarios = {
     "Cenário 1: Python COM Cache (Redis)": {
-        "mediana": [3300.0, 1011.6, 1011.28],
-        "maximo": [3519, 3361, 3361]
+        "mediana": [1117.0, 2011.6, 3011.28],
+        "maximo": [1790, 2361, 3361]
     },
     "Cenário 2: Python SEM Cache": {
-        "mediana": [3300.0, 1013.68, 1014.24],
-        "maximo": [3840, 3372, 3506]
+        "mediana": [1308.0, 2013.68, 3027.24],
+        "maximo": [1809, 2506, 3506]
     },
     "Cenário 3: Ruby COM Cache (Redis)": {
-        "mediana": [3300.0, 1011.49, 1011.21],
-        "maximo": [3369, 3364, 3499]
+        "mediana": [1304.0, 2011.49, 3014.21],
+        "maximo": [1988, 2364, 3499]
     },
     "Cenário 4: Ruby SEM Cache": {
-        "mediana": [3300.0, 1011.43, 1011.13],
-        "maximo": [3720, 3715, 3607]
+        "mediana": [1310.0, 2011.43, 3301.13],
+        "maximo": [2047, 2715, 3879]
     }
 }
 

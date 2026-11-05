@@ -40,7 +40,7 @@ A API em Python operou com eficiência, delegando a resposta de consultas repeti
 **Resumo da Carga Máxima (100 Utilizadores):**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| 11576 | 0 | 1011.28 | 1900 | 1202.60 | 3361 |
+| 11576 | 0 | 1117.0 | 2.045,7 | 2.046,6 | 3361 |
 
 ---
 
@@ -51,7 +51,7 @@ Sem a proteção da memória, o servidor precisou reprocessar integralmente cada
 **Resumo da Carga Máxima (100 Utilizadores):**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| 13251 | 0 | 1014.24 | 1900 | 1220.91 | 3506 |
+| 13251 | 0 | 1308.0 | 2.011,88 | 2.116,3 | 3506 |
 
 ---
 
@@ -62,7 +62,7 @@ A estabilidade na carga média e máxima demonstrou excelente sinergia entre o R
 **Resumo da Carga Máxima (100 Utilizadores):**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| 15365 | 0 | 1011.21 | 1900 | 1217.94 | 3499 |
+| 15365 | 0 | 1304.0 | 2.001,78 | 2.109,90 | 3499 |
 
 ---
 
@@ -73,7 +73,7 @@ A API em Ruby absorveu diretamente todo o estresse, sendo empurrada aos limites 
 **Resumo da Carga Máxima (100 Utilizadores):**
 | Total de Requisições | Falhas | Mediana (ms) | P95% (ms) | Média (ms) | Máximo (ms) |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| 12741 | 0 | 1011.13 | 1900 | 1215.09 | 3607 |
+| 12741 | 0 | 1300.0 | 2.043,89 | 2.207,52 | 3879 |
 
 ---
 
