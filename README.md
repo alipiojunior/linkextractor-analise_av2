@@ -21,16 +21,6 @@ Os testes "Com e Sem Cache" validaram o comportamento da infraestrutura. Com o R
 
 ---
 
-## 📊 Visão Geral do Desempenho (Carga Máxima: 100 Utilizadores)
-
-Para ilustrar o impacto do cache, o gráfico centralizado compara o **Tempo Médio** e o **Tempo Máximo** de resposta dos quatro cenários sob estresse.
-
-![Gráfico Comparativo de Tempos](imagens/comparativo_tempos.png)
-
-*(Nota: Embora as médias globais convirjam para ~1200 ms, a ausência da camada de cache provocou picos de latência máxima visivelmente superiores nos Cenários 2 e 4).*
-
----
-
 ## 📈 Análise Detalhada por Cenário (10, 50 e 100 Utilizadores)
 
 ### 🟢 Cenário 1: Python COM Cache (Redis)
